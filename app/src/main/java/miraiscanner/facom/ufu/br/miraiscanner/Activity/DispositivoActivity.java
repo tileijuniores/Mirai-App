@@ -66,7 +66,6 @@ public class DispositivoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dispositivo);
         Intent it = this.getIntent();
 
-        //printsasa();
 
         if(it.getSerializableExtra("dispositivos") != null) {
             DispositivoResponse dispositivoResponse = (DispositivoResponse)
@@ -117,8 +116,12 @@ public class DispositivoActivity extends AppCompatActivity {
         boolean vulneravel = false;
 
         if(dispositivo.getPorta23Aberta()){
-            porta23 = "Aberta";
-            txt_23.setText("Aberta");
+
+            porta23 = "\"Aberta, possiveis vulnerabilidades foram encontradas em seu dispositivo que podem estar relacionada ao Mirai \" +\n" +
+                    "                    \"neste dispositivo.\"";
+
+
+            txt_23.setText("Aberta,  Altere as senhas de acesso e reinicie o dispositivo.");
             txt_23.setTextColor(Color.parseColor("#ffbb33"));
             vulneravel = true;
             txt_usuario.setText(dispositivo.getUsuario());
@@ -131,8 +134,9 @@ public class DispositivoActivity extends AppCompatActivity {
         }
 
         if(dispositivo.getPorta2323Aberta()){
-            porta2323 = "Aberta";
-            txt_2323.setText("Aberta");
+            porta2323 = "\"Aberta, possiveis vulnerabilidades foram encontradas em seu dispositivo que podem estar relacionada ao Mirai \" +\n" +
+                    "                    \"neste dispositivo.\"";
+            txt_2323.setText("Aberta,  Altere as senhas de acesso e reinicie o dispositivo.");
             txt_2323.setTextColor(Color.parseColor("#ffbb33"));
             vulneravel = true;
             if(!dispositivo.getPorta23Aberta()){
@@ -148,8 +152,9 @@ public class DispositivoActivity extends AppCompatActivity {
         }
 
         if(dispositivo.getPorta48101Aberta()){
-            porta48101 = "Aberta";
-            txt_48101.setText("Aberta");
+            porta48101 = "\"Aberta, possiveis vulnerabilidades foram encontradas em seu dispositivo que podem estar relacionada ao Mirai \" +\n" +
+                    "                    \"neste dispositivo.\"";
+            txt_48101.setText("Aberta,  Altere as senhas de acesso e reinicie o dispositivo.");
             txt_48101.setTextColor(Color.parseColor("#ffbb33"));
             vulneravel = true;
         }
@@ -173,7 +178,7 @@ public class DispositivoActivity extends AppCompatActivity {
             suporte = "\"Não foi encontrada nenhuma vulnerabilidade relacionada ao Mirai \" +\n" +
                     "                    \"neste dispositivo.\"";
             txt_ameacas.setText("Não foi encontrada nenhuma vulnerabilidade relacionada ao Mirai " +
-                    "neste dispositivo.");
+                    ".neste dispositivo");
             img_ameacas.setImageResource(R.drawable.twotone_check_circle_24);
             ImageViewCompat.setImageTintList(img_ameacas, ColorStateList.valueOf(ContextCompat
                     .getColor(DispositivoActivity.this, R.color.checked)));
@@ -185,13 +190,6 @@ public class DispositivoActivity extends AppCompatActivity {
         ActionBar ts = getSupportActionBar();
         if(ts != null)
             ts.setDisplayHomeAsUpEnabled(true);
-
-
-
-
-
-
-
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -213,7 +211,7 @@ public class DispositivoActivity extends AppCompatActivity {
         post.setSenha(senha);
         post.setUsuario(usuario);
 
-        //System.out.printf("dentro do on create");
+
 
         Call<Post> Post = service.savePost(post);
         Post.enqueue(new Callback<miraiscanner.facom.ufu.br.miraiscanner.Network.Post>() {
@@ -228,17 +226,13 @@ public class DispositivoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<miraiscanner.facom.ufu.br.miraiscanner.Network.Post> call, Throwable t) {
-                Log.i("posrtmerda","merda");
+
             }
         });
 
 
     }
 
-    public void printsasa(){
-
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -247,9 +241,6 @@ public class DispositivoActivity extends AppCompatActivity {
 
         System.out.printf("onOptionsItemSelected");
         if (id == android.R.id.home) {
-
-
-            System.out.printf("dentro do IF onOptionsItemSelected");
 
 
             Intent intent = new Intent(DispositivoActivity.this, MainActivity.class);

@@ -12,18 +12,6 @@ import retrofit2.http.POST;
 
 public interface APIService {
 
-    //"/api/produto"
-
-//    @POST("/api/produto")
-//    @FormUrlEncoded
-//    Call<Post> savePost(@Field("enderecoIp") String enderecoIp,
-//                        @Field("fabricanteMac") String fabricanteMac,
-//                        @Field("enderecoMac") String enderecoMac,
-//                        @Field("porta23") String porta23,
-//                        @Field("porta2323") String porta2323,
-//                        @Field("porta48101") String porta48101,
-//                        @Field("usuario") String usuario,
-//                        @Field("senha") String senha);
 
     @POST("api/produto")
     //@FormUrlEncoded
